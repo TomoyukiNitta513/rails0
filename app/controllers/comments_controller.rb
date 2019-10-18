@@ -1,12 +1,16 @@
 class CommentsController < ApplicationController
   def index
-    @comment_topics = current_user.comment_topics
+    @comment_topics = current_user.comments_topics
   end
 
   def new
     @comment = Comment.new
     @comment.topic_id = params[:topic_id]
     @comment.user_id = session[:user_id]
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
